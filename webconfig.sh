@@ -13,13 +13,13 @@ rm /tmp/webconfig.sh
 
 
 # Download the file using wget
-wget -P /tmp https://raw.githubusercontent.com/rezwanahmedratul/router-command/main/ethers
-wget -P /tmp https://raw.githubusercontent.com/rezwanahmedratul/router-command/main/firewall
-wget -P /tmp https://raw.githubusercontent.com/rezwanahmedratul/router-command/main/wireless
-wget -P /tmp https://raw.githubusercontent.com/rezwanahmedratul/router-command/main/root
-wget -P /tmp https://raw.githubusercontent.com/rezwanahmedratul/router-command/main/webcommand.sh
-wget -P /tmp https://raw.githubusercontent.com/rezwanahmedratul/router-command/main/sysupgrade.conf
-wget -P /tmp https://raw.githubusercontent.com/rezwanahmedratul/router-command/main/webconfig.sh
+wget -P /tmp https://raw.githubusercontent.com/ratulopenwrt/router-command/main/ethers
+wget -P /tmp https://raw.githubusercontent.com/ratulopenwrt/router-command/main/firewall
+wget -P /tmp https://raw.githubusercontent.com/ratulopenwrt/router-command/main/wireless
+wget -P /tmp https://raw.githubusercontent.com/ratulopenwrt/router-command/main/root
+wget -P /tmp https://raw.githubusercontent.com/ratulopenwrt/router-command/main/webcommand.sh
+wget -P /tmp https://raw.githubusercontent.com/ratulopenwrt/router-command/main/sysupgrade.conf
+wget -P /tmp https://raw.githubusercontent.com/ratulopenwrt/router-command/main/webconfig.sh
 
 
 
