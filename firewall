@@ -123,6 +123,7 @@ config rule
 	option dest 'wan'
 	option target 'ACCEPT'
 	list src_mac 'E0:CC:F8:4A:C4:82'
+ list src_mac '64:DD:E9:D3:C6:AB'
 	list proto 'all'
 
 config rule
@@ -134,6 +135,7 @@ config rule
 	list src_mac '34:0A:33:69:D8:AA'
 	list src_mac 'E0:CC:F8:4A:C4:82'
 	list src_mac 'B2:BE:76:4A:C4:82'
+ list src_mac '64:DD:E9:D3:C6:AB'
 
 config rule
 	option name 'Jarin'
@@ -185,6 +187,7 @@ config rule
 	option target 'ACCEPT'
 	list proto 'all'
 	list src_mac 'E0:CC:F8:4A:C4:82'
+ list src_mac '64:DD:E9:D3:C6:AB'
 
 config rule
 	option name 'Others'
@@ -364,6 +367,7 @@ config rule
 	option dest_port '80 443'
 	option target 'ACCEPT'
 	list src_mac 'E0:CC:F8:4A:C4:82'
+ list src_mac '64:DD:E9:D3:C6:AB'
 	list src_mac 'C8:9B:D7:F6:B6:77'
 	list src_mac 'B2:BE:76:4A:C4:82'
 	list src_mac '8C:DE:F9:DC:49:90'
