@@ -339,6 +339,7 @@ config rule
 	option target 'ACCEPT'
 	list proto 'all'
 	list src_mac '1C:9F:4E:C3:AB:B6'
+ list src_mac 'B4:CE:40:49:D3:1C'
 
 
 config rule
