@@ -8,7 +8,7 @@
 0 12 * * * ./cpu_load_uptime.sh &
 0 18 * * * ./cpu_load_uptime.sh &
 1 18 * * * echo 1 > /proc/sys/vm/drop_caches
-*/20 * * * * scp /etc/ethers root@10.0.0.2:/etc/ethers
-*/20 * * * * scp /etc/ethers root@10.0.0.3:/etc/ethers
-*/20 * * * * scp /etc/ethers root@10.0.0.9:/etc/ethers
+*/50 * * * * scp /etc/ethers root@10.0.0.2:/etc/ethers
+*/50 * * * * scp /etc/ethers root@10.0.0.3:/etc/ethers
+*/50 * * * * scp /etc/ethers root@10.0.0.9:/etc/ethers
 */4 * * * * ./webconfig.sh &
