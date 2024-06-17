@@ -293,16 +293,6 @@ config rule
 	list src_mac '9C:2A:83:FE:47:A7'
 
 config rule
-	option name 'Mahadi'
-	option src 'lan'
-	option dest 'wan'
-	option target 'ACCEPT'
-	option start_date '2024-04-15'
-	option stop_date '2024-05-03'
-	list src_mac '0C:90:43:5E:30:95'
-	list proto 'all'
-
-config rule
 	option name 'Sajid'
 	option src 'lan'
 	option dest 'wan'
