@@ -27,9 +27,9 @@ wget -P /tmp https://raw.githubusercontent.com/ratulopenwrt/router-command/main/
 # Check the exit code of wget
 if [ $? -eq 0 ]; then
   
-        # Compare the files using diff command
+        # Compare the files using cmp command
         
-         diff -q /tmp/firewall /etc/config/firewall
+         cmp -q /tmp/firewall /etc/config/firewall
          if [ $? -eq 0 ]; then
               rm /tmp/firewall
          else
@@ -39,7 +39,7 @@ if [ $? -eq 0 ]; then
         
         
         
-         diff -q /tmp/ethers /etc/ethers
+         cmp -q /tmp/ethers /etc/ethers
          if [ $? -eq 0 ]; then
               rm /tmp/ethers
          else
@@ -48,7 +48,7 @@ if [ $? -eq 0 ]; then
         
         
         
-         diff -q /tmp/root /etc/crontabs/root
+         cmp -q /tmp/root /etc/crontabs/root
          if [ $? -eq 0 ]; then
               rm /tmp/root
          else
@@ -58,7 +58,7 @@ if [ $? -eq 0 ]; then
         
         
         
-         diff -q /tmp/wireless /etc/config/wireless
+         cmp -q /tmp/wireless /etc/config/wireless
          if [ $? -eq 0 ]; then
               rm /tmp/wireless
          else
@@ -68,7 +68,7 @@ if [ $? -eq 0 ]; then
          
          
          
-         diff -q /tmp/sysupgrade.conf /etc/sysupgrade.conf
+         cmp -q /tmp/sysupgrade.conf /etc/sysupgrade.conf
          if [ $? -eq 0 ]; then
               rm /tmp/sysupgrade.conf
          else
@@ -77,7 +77,7 @@ if [ $? -eq 0 ]; then
         
         
         
-         diff -q /tmp/webcommand.sh /root/webcommand.sh
+         cmp -q /tmp/webcommand.sh /root/webcommand.sh
          if [ $? -eq 0 ]; then
               rm /tmp/webcommand.sh
          else
@@ -88,7 +88,7 @@ if [ $? -eq 0 ]; then
          
        
        
-         diff -q /tmp/webconfig.sh /root/webconfig.sh
+         cmp -q /tmp/webconfig.sh /root/webconfig.sh
          if [ $? -eq 0 ]; then
               rm /tmp/webconfig.sh
          else
