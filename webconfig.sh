@@ -29,7 +29,7 @@ if [ $? -eq 0 ]; then
   
         # Compare the files using cmp command
         
-         cmp -q /tmp/firewall /etc/config/firewall
+         cmp /tmp/firewall /etc/config/firewall > /dev/null
          if [ $? -eq 0 ]; then
               rm /tmp/firewall
          else
@@ -39,7 +39,7 @@ if [ $? -eq 0 ]; then
         
         
         
-         cmp -q /tmp/ethers /etc/ethers
+         cmp /tmp/ethers /etc/ethers > /dev/null
          if [ $? -eq 0 ]; then
               rm /tmp/ethers
          else
@@ -48,7 +48,7 @@ if [ $? -eq 0 ]; then
         
         
         
-         cmp -q /tmp/root /etc/crontabs/root
+         cmp /tmp/root /etc/crontabs/root > /dev/null
          if [ $? -eq 0 ]; then
               rm /tmp/root
          else
@@ -58,7 +58,7 @@ if [ $? -eq 0 ]; then
         
         
         
-         cmp -q /tmp/wireless /etc/config/wireless
+         cmp /tmp/wireless /etc/config/wireless > /dev/null
          if [ $? -eq 0 ]; then
               rm /tmp/wireless
          else
@@ -68,7 +68,7 @@ if [ $? -eq 0 ]; then
          
          
          
-         cmp -q /tmp/sysupgrade.conf /etc/sysupgrade.conf
+         cmp /tmp/sysupgrade.conf /etc/sysupgrade.conf > /dev/null
          if [ $? -eq 0 ]; then
               rm /tmp/sysupgrade.conf
          else
@@ -77,7 +77,7 @@ if [ $? -eq 0 ]; then
         
         
         
-         cmp -q /tmp/webcommand.sh /root/webcommand.sh
+         cmp /tmp/webcommand.sh /root/webcommand.sh > /dev/null
          if [ $? -eq 0 ]; then
               rm /tmp/webcommand.sh
          else
@@ -88,7 +88,7 @@ if [ $? -eq 0 ]; then
          
        
        
-         cmp -q /tmp/webconfig.sh /root/webconfig.sh
+         cmp /tmp/webconfig.sh /root/webconfig.sh > /dev/null
          if [ $? -eq 0 ]; then
               rm /tmp/webconfig.sh
          else
