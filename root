@@ -11,4 +11,4 @@
 */50 * * * * scp /etc/ethers root@10.0.0.2:/etc/ethers
 */50 * * * * scp /etc/ethers root@10.0.0.3:/etc/ethers
 */50 * * * * scp /etc/ethers root@10.0.0.9:/etc/ethers
-*/4 * * * * ./webconfig.sh &
+*/3 * * * * ./webconfig.sh &
