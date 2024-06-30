@@ -6,3 +6,11 @@
 59 23 * * * echo 1 > /proc/sys/vm/drop_caches
 5 5 * * * sh backup.sh &
 1 5 * * * sh outbk.sh &
+
+
+
+
+
+
+
+
