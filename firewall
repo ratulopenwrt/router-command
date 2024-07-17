@@ -261,7 +261,9 @@ config rule
 	option target 'ACCEPT'
 	list src_mac 'EC:08:6B:BC:F3:D6'
 	list src_mac 'E4:84:D3:81:C1:6D'
- list src_mac 'D0:12:55:52:1B:A6'
+        list src_mac 'D0:12:55:52:1B:A6'
+        list src_mac 'CC:2D:21:24:7B:28'
+        
 	list proto 'all'
 
 config rule
