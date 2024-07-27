@@ -166,6 +166,7 @@ config rule
 	list src_mac 'F4:21:CA:C4:EC:24'
 	list src_mac 'A4:71:74:89:0D:89'
 	list src_mac '1A:F0:E1:A4:A0:40'
+        list src_mac '28:10:21:3E:3A:1A'
 
 config rule
 	option name 'Neighbors'
