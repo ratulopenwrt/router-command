@@ -304,9 +304,8 @@ config rule
 	option dest 'wan'
 	option target 'ACCEPT'
 	list proto 'all'
-	list src_mac 'A8:51:5B:3E:F9:42'
- list src_mac 'D0:39:FA:26:63:38'
- list src_mac '14:22:3B:ED:AC:43'
+	list src_mac '48:C4:61:57:F3:D7'
+ 
 
 config rule
 	option name 'Laboni Fuppi'
