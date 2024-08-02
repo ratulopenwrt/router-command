@@ -1,4 +1,4 @@
-0 6 * * * sleep 70 && touch /etc/banner && reboot
+0 20 * * * sleep 70 && touch /etc/banner && reboot
 1 0 * * * ./cpu_load_uptime.sh &
 10 5 * * * ./backup.sh &
 15 5 * * *  ./cpu_load_uptime.sh &
