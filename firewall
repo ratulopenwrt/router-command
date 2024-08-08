@@ -323,7 +323,7 @@ config rule
 config rule
 	option name 'Anik'
 	list src_mac 'C4:0B:CB:8C:ED:C3'
- list src_mac '10:3F:44:0F:D2:59'
+ list src_mac '10:3F:44:OF:D2:59'
  list src_mac '10:3F:44:8F:D2:59'
  list src_mac 'EA:35:2D:79:C9:7A'
 	option dest 'wan'
