@@ -208,7 +208,7 @@ config rule
 	option target 'ACCEPT'
 	list proto 'all'
 	list src_mac '34:0A:33:6D:B5:DA'
-	list src_mac '3C:84:6A:48:01:DC'
+	list src_mac '94:16:25:BF:53:B1'
 	list src_mac '0C:F3:46:F3:CC:A9'
 	list src_mac 'E4:93:6A:AA:D8:21'
 	list src_mac 'C0:EE:FB:08:3E:81'
