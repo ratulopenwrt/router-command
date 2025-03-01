@@ -18,7 +18,7 @@ config wifi-iface 'default_radio0'
 	option ssid 'RATUL'
 	option encryption 'psk2+ccmp'
 	option key 'C12H22O11'
-      #  option disabled '1'
+        option disabled '1'
 
 
 #5G
