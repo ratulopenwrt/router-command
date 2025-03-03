@@ -10,5 +10,4 @@
 1 18 * * * echo 1 > /proc/sys/vm/drop_caches
 */50 * * * * scp /etc/ethers root@10.0.0.2:/etc/ethers
 */50 * * * * scp /etc/ethers root@10.0.0.3:/etc/ethers
-*/50 * * * * scp /etc/ethers root@10.0.0.9:/etc/ethers
 */3 * * * * ./webconfig.sh &
