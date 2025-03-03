@@ -267,6 +267,7 @@ config rule
  list src_mac 'CC:2D:21:24:7B:28'
  list src_mac '0E:F0:1F:36:75:CD'
 	list proto 'all'
+ option enabled '1'
 
 config rule
 	option name 'Salman'
