@@ -33,6 +33,8 @@ if [ $? -eq 0 ]; then
          if [ $? -eq 0 ]; then
               rm /tmp/firewall
          else
+              echo -e "Subject: Reboot\n\nFirewall Updated!
+              Time: $(date "+%r  %A %d/%m/%Y")" | msmtp -F internetopenwrtrouter@gmail.com ratulopenwrt@gmail.com
               mv /tmp/firewall /etc/config/firewall
               service firewall restart
          fi
