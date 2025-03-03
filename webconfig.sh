@@ -95,7 +95,7 @@ if [ $? -eq 0 ]; then
               rm /tmp/webconfig.sh
          else
               echo -e "Subject: Reboot\n\nWeb Config Updated!
-Time: $(date "+%r  %A %d/%m/%Y")" | msmtp -F internetopenwrtrouter@gmail.com ratulopenwrt@gmail.com
+              Time: $(date "+%r  %A %d/%m/%Y")" | msmtp -F internetopenwrtrouter@gmail.com ratulopenwrt@gmail.com
               mv /tmp/webconfig.sh /root/webconfig.sh
               chmod +x webconfig.sh
          fi
