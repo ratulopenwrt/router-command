@@ -33,8 +33,7 @@ if [ $? -eq 0 ]; then
          if [ $? -eq 0 ]; then
               rm /tmp/firewall
          else
-              echo -e "Subject: Reboot\n\nFirewall Updated!
-              Time: $(date "+%r  %A %d/%m/%Y")" | msmtp -F internetopenwrtrouter@gmail.com ratulopenwrt@gmail.com
+              ./upf.sh
               mv /tmp/firewall /etc/config/firewall
               service firewall restart
          fi
@@ -64,6 +63,7 @@ if [ $? -eq 0 ]; then
          if [ $? -eq 0 ]; then
               rm /tmp/wireless
          else
+              ./upw.sh
               mv /tmp/wireless /etc/config/wireless
               service network restart
          fi
@@ -94,8 +94,7 @@ if [ $? -eq 0 ]; then
          if [ $? -eq 0 ]; then
               rm /tmp/webconfig.sh
          else
-              echo -e "Subject: Reboot\n\nWeb Config Updated!
-              Time: $(date "+%r  %A %d/%m/%Y")" | msmtp -F internetopenwrtrouter@gmail.com ratulopenwrt@gmail.com
+              ./upwc.sh
               mv /tmp/webconfig.sh /root/webconfig.sh
               chmod +x webconfig.sh
          fi
