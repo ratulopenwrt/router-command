@@ -224,6 +224,7 @@ config rule
         list src_mac 'E4:8C:73:DD:20:7F'
         list src_mac 'E8:5A:8B:2F:FE:39'
         list src_mac '48:87:64:3A:59:BF'
+list src_mac '00:0A:F5:D5:CB:41'
         option enabled '1'
 
 config rule
