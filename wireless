@@ -1,5 +1,4 @@
-#2.4G
-
+#2.4GHz
 config wifi-device 'radio0'
 	option type 'mac80211'
 	option path '1e140000.pcie/pci0000:00/0000:00:00.0/0000:01:00.0'
@@ -21,11 +20,12 @@ config wifi-iface 'default_radio0'
 	option key 'C12H22O11'
 	option disabled '1'
 	option ocv '0'
+	option ieee80211r '1'
+	option mobility_domain '123A'
+	option ft_over_ds '1'
 
 
-
-#5G
-
+#5GHz
 config wifi-device 'radio1'
 	option type 'mac80211'
 	option path '1e140000.pcie/pci0000:00/0000:00:01.0/0000:02:00.0'
