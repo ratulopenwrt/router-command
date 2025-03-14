@@ -22,7 +22,7 @@ config wifi-iface 'default_radio0'
 	option ocv '0'
 	option ieee80211r '1'
 	option mobility_domain '123A'
-	option ft_over_ds '1'
+	option ft_over_the_air '1'
 
 
 #5GHz
@@ -46,7 +46,7 @@ config wifi-iface 'default_radio1'
 	option dtim_period '1'
 	option ieee80211r '1'
 	option mobility_domain '123A'
-	option ft_over_ds '1'
+	option ft_over_the_air '1'
 	option ocv '0'
 
 config wifi-iface 'wifinet2'
@@ -57,7 +57,7 @@ config wifi-iface 'wifinet2'
 	option key 'C12H22O11'
 	option ieee80211r '1'
 	option mobility_domain '123B'
-	option ft_over_ds '1'
+	option ft_over_the_air '1'
 	option network 'lan'
 	option ocv '0'
 
