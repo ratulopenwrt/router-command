@@ -122,8 +122,8 @@ config rule
 	option src 'lan'
 	option dest 'wan'
 	option target 'ACCEPT'
- list src_mac '64:DD:E9:D3:C6:AB'
- list src_mac '00:0A:F5:DD:5E:D3'
+	list src_mac '64:DD:E9:D3:C6:AB'
+	list src_mac '00:0A:F5:DD:5E:D3'
 	list proto 'all'
 
 config rule
@@ -134,8 +134,8 @@ config rule
 	list proto 'all'
 	list src_mac '34:0A:33:69:D8:AA'
 	list src_mac 'B2:BE:76:4A:C4:82'
- list src_mac '64:DD:E9:D3:C6:AB'
- list src_mac '00:0A:F5:DD:5E:D3'
+	list src_mac '64:DD:E9:D3:C6:AB'
+	list src_mac '00:0A:F5:DD:5E:D3'
 
 config rule
 	option name 'Jarin'
@@ -144,7 +144,6 @@ config rule
 	list src_mac 'C8:9B:D7:F6:B6:77'
 	option dest 'wan'
 	option target 'ACCEPT'
- option enabled '1'
 
 config rule
 	option name 'Friends'
@@ -166,40 +165,7 @@ config rule
 	list src_mac 'F4:21:CA:C4:EC:24'
 	list src_mac 'A4:71:74:89:0D:89'
 	list src_mac '1A:F0:E1:A4:A0:40'
-        list src_mac '28:1D:21:3E:3A:1A'
-
-config rule
-	option name 'Neighbors'
-	option src 'lan'
-	option dest 'wan'
-	option target 'ACCEPT'
-	list proto 'all'
-	list src_mac 'FC:19:99:1B:90:82'
-	list src_mac 'CC:3B:27:CA:8A:F3'
-	list src_mac '14:5E:69:45:8E:4F'
-	list src_mac 'C0:C9:76:88:18:59'
- list src_mac '48:90:2F:A3:99:8C'
- list src_mac 'E4:BC:AA:6B:B1:A3'
- 
-config rule
-	option name 'Paid'
-	option src 'lan'
-	option dest 'wan'
-	option target 'ACCEPT'
-	list proto 'all'
- list src_mac '64:DD:E9:D3:C6:AB'
- list src_mac '00:0A:F5:DD:5E:D3'
-
-config rule
-	option name 'Others'
-	option src 'lan'
-	option dest 'wan'
-	option target 'ACCEPT'
-	option start_date '2023-11-03'
-	option stop_date '2023-12-03'
-	list proto 'all'
-	list src_mac '44:E7:61:BC:4A:7D'
-	list src_mac 'B2:BE:76:BC:4A:7D'
+	list src_mac '28:1D:21:3E:3A:1A'
 
 config rule
 	option name 'Sabbir-Anik'
@@ -220,13 +186,12 @@ config rule
 	list src_mac 'D8:A3:15:8F:92:7B'
 	list src_mac '48:2C:A0:9C:D6:87'
 	list src_mac 'A8:EF:5F:CA:6E:5B'
-        list src_mac '54:FC:F0:6F:CF:E7'
-        list src_mac 'E4:8C:73:DD:20:7F'
-        list src_mac 'E8:5A:8B:2F:FE:39'
-        list src_mac '48:87:64:3A:59:BF'
-list src_mac '00:0A:F5:D5:CB:41'
-list src_mac 'F4:30:8B:66:B4:57'
-        option enabled '1'
+	list src_mac '54:FC:F0:6F:CF:E7'
+	list src_mac 'E4:8C:73:DD:20:7F'
+	list src_mac 'E8:5A:8B:2F:FE:39'
+	list src_mac '48:87:64:3A:59:BF'
+	list src_mac '00:0A:F5:D5:CB:41'
+	list src_mac 'F4:30:8B:66:B4:57'
 
 config rule
 	option name 'Shimanto'
@@ -253,25 +218,11 @@ config rule
 	list src_mac '48:02:86:F2:F6:8F'
 	list src_mac '18:4E:CB:5E:24:CD'
 	list src_mac '6C:00:6B:B2:4C:EB'
- list src_mac 'E0:CC:F8:4A:C4:82'
- list src_mac '6C:24:A6:F3:5A:49'
- list src_mac '18:D7:17:7E:5F:31'
- list src_mac '1C:9F:4e:BF:CA:8D'
+	list src_mac 'E0:CC:F8:4A:C4:82'
+	list src_mac '6C:24:A6:F3:5A:49'
+	list src_mac '18:D7:17:7E:5F:31'
+	list src_mac '1C:9F:4e:BF:CA:8D'
 	list proto 'all'
-        option enabled '1'
-
-config rule
-	option name 'Sadhin '
-	option src 'lan'
-	option dest 'wan'
-	option target 'ACCEPT'
-	list src_mac 'EC:08:6B:BC:F3:D6'
-	list src_mac 'E4:84:D3:81:C1:6D'
- list src_mac 'D0:12:55:52:1B:A6'
- list src_mac 'CC:2D:21:24:7B:28'
- list src_mac '0E:F0:1F:36:75:CD'
-	list proto 'all'
- option enabled '1'
 
 config rule
 	option name 'Salman'
@@ -285,18 +236,7 @@ config rule
 	list src_mac 'C4:DF:39:41:97:A1'
 	list src_mac '14:47:2D:7F:0E:EB'
 	list src_mac '98:AC:EF:F3:04:EF'
-        list src_mac '90:DF:7D:BD:4F:D5'
-        option enabled '1'
-
-
-config rule
-	option name 'Sajid'
-	option src 'lan'
-	option dest 'wan'
-	option target 'ACCEPT'
-	list proto 'all'
-	list src_mac '48:C4:61:57:F3:D7'
- 
+	list src_mac '90:DF:7D:BD:4F:D5'
 
 config rule
 	option name 'Laboni Fuppi'
@@ -310,27 +250,6 @@ config rule
 	list src_mac 'E8:F7:91:9B:07:6C'
 	list src_mac '4C:E0:DB:FE:7F:67'
 
-
-config rule
-	option name 'Anik'
-	list src_mac 'C4:0B:CB:8C:ED:C3'
-        list src_mac '10:3F:44:0F:D2:59'
-        list src_mac 'EA:35:2D:79:C9:7A'
-	option dest 'wan'
-	option target 'ACCEPT'
-	list proto 'all'
-	option src 'lan'
-
-config rule
-	option name 'Arafat'
-	option src 'lan'
-	option dest 'wan'
-	option target 'ACCEPT'
-	list proto 'all'
-	list src_mac '1C:9F:4E:C3:AB:B6'
-        list src_mac 'B4:CE:40:49:D3:1C'
-
-
 config rule
 	option name 'Router '
 	option src 'lan'
@@ -340,7 +259,7 @@ config rule
 	list src_mac '8C:DE:F9:DC:49:90'
 	list src_mac '8E:DE:F9:DC:49:91'
 	list src_mac '48:22:54:CD:1D:15'
-        list src_mac 'F4:F2:6D:A3:D9:CE'
+	list src_mac 'F4:F2:6D:A3:D9:CE'
 
 config rule
 	option name 'FTP'
@@ -355,10 +274,10 @@ config rule
 	option src 'lan'
 	option dest_port '80 443'
 	option target 'ACCEPT'
-        list src_mac '64:DD:E9:D3:C6:AB'
-        list src_mac '00:0A:F5:DD:5E:D3'
-  	list src_mac 'C8:9B:D7:F6:B6:77'
-        list src_mac 'E4:8C:73:DD:20:7F'
+	list src_mac '64:DD:E9:D3:C6:AB'
+	list src_mac '00:0A:F5:DD:5E:D3'
+	list src_mac 'C8:9B:D7:F6:B6:77'
+	list src_mac 'E4:8C:73:DD:20:7F'
 
 config rule
 	option name 'drop http'
@@ -369,6 +288,4 @@ config rule
 
 config forwarding
 	option src 'lan'
-        option dest 'wan'
-     #   option dest 'unspecified'
-  
+	option dest 'wan'
