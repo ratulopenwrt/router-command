@@ -287,5 +287,6 @@ config rule
 	option target 'REJECT'
 
 config forwarding
-	option src 'lan'
-	option dest 'wan'
+ 	option src 'lan'
+     #    option dest 'wan'
+         option dest 'unspecified'
