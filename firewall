@@ -124,6 +124,7 @@ config rule
 	option target 'ACCEPT'
 	list src_mac '64:DD:E9:D3:C6:AB'
 	list src_mac '00:0A:F5:DD:5E:D3'
+	list src_mac 'FC:AA:14:6A:51:E0'
 	list proto 'all'
 
 config rule
@@ -136,6 +137,7 @@ config rule
 	list src_mac 'B2:BE:76:4A:C4:82'
 	list src_mac '64:DD:E9:D3:C6:AB'
 	list src_mac '00:0A:F5:DD:5E:D3'
+	list src_mac 'FC:AA:14:6A:51:E0'
 
 config rule
 	option name 'Jarin'
@@ -279,6 +281,7 @@ config rule
 	list src_mac 'C8:9B:D7:F6:B6:77'
 	list src_mac 'E4:8C:73:DD:20:7F'
 	list src_mac 'F4-26-79-3A-1A-4C'
+	list src_mac 'FC:AA:14:6A:51:E0'
 
 config rule
 	option name 'drop http'
