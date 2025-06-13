@@ -225,6 +225,8 @@ config rule
 	list src_mac '6C:24:A6:F3:5A:49'
 	list src_mac '18:D7:17:7E:5F:31'
 	list src_mac '1C:9F:4e:BF:CA:8D'
+	list src_mac '6C:D1:99:22:5D:67'
+	list src_mac '94:54:CE:52:24:F1'
 	list proto 'all'
 
 config rule
