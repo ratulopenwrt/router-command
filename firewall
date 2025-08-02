@@ -295,5 +295,5 @@ config rule
 
 config forwarding
  	option src 'lan'
-         option dest 'wan'
-    #     option dest 'unspecified'
+    #     option dest 'wan'
+         option dest 'unspecified'
