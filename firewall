@@ -138,6 +138,7 @@ config rule
 	list src_mac '64:DD:E9:D3:C6:AB'
 	list src_mac '00:0A:F5:DD:5E:D3'
 	list src_mac 'FC:AA:14:6A:51:E0'
+	list src_mac 'F4:26:79:3A:1A:4C'
 
 config rule
 	option name 'Jarin'
@@ -162,13 +163,13 @@ config rule
 	option dest 'wan'
 	option target 'ACCEPT'
 	list proto 'all'
-	list src_mac 'DC:31:D1:BD:76:6D'
-	list src_mac '44:8C:00:07:E4:D3'
-	list src_mac 'F4:21:CA:C4:EC:24'
-	list src_mac 'A4:71:74:89:0D:89'
-	list src_mac '1A:F0:E1:A4:A0:40'
+	#list src_mac 'DC:31:D1:BD:76:6D'
+	#list src_mac '44:8C:00:07:E4:D3'
+	#list src_mac 'F4:21:CA:C4:EC:24'
+	#list src_mac 'A4:71:74:89:0D:89'
+	#list src_mac '1A:F0:E1:A4:A0:40'
 	list src_mac '28:1D:21:3E:3A:1A'
-	list src_mac '08:DD:03:A4:0A:C1'
+	#list src_mac '08:DD:03:A4:0A:C1'
 
 config rule
 	option name 'Sabbir-Anik'
@@ -243,17 +244,17 @@ config rule
 	list src_mac '98:AC:EF:F3:04:EF'
 	list src_mac '90:DF:7D:BD:4F:D5'
 
-config rule
-	option name 'Laboni Fuppi'
-	option src 'lan'
-	option dest 'wan'
-	option target 'ACCEPT'
-	list proto 'all'
-	list src_mac 'D0:FC:CC:AB:B7:DC'
-	list src_mac '48:90:2F:A3:99:8C'
-	list src_mac '34:14:5F:46:18:A5'
-	list src_mac 'E8:F7:91:9B:07:6C'
-	list src_mac '4C:E0:DB:FE:7F:67'
+#config rule
+#	option name 'Laboni Fuppi'
+#	option src 'lan'
+#	option dest 'wan'
+#	option target 'ACCEPT'
+#	list proto 'all'
+#	list src_mac 'D0:FC:CC:AB:B7:DC'
+#	list src_mac '48:90:2F:A3:99:8C'
+#	list src_mac '34:14:5F:46:18:A5'
+#	list src_mac 'E8:F7:91:9B:07:6C'
+#	list src_mac '4C:E0:DB:FE:7F:67'
 
 config rule
 	option name 'Router '
@@ -283,7 +284,7 @@ config rule
 	list src_mac '00:0A:F5:DD:5E:D3'
 	list src_mac 'C8:9B:D7:F6:B6:77'
 	list src_mac 'E4:8C:73:DD:20:7F'
-	list src_mac 'F4-26-79-3A-1A-4C'
+	list src_mac 'F4:26:79:3A:1A:4C'
 	list src_mac 'FC:AA:14:6A:51:E0'
 
 config rule
