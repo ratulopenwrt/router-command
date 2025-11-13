@@ -2,7 +2,7 @@
 
 # === System Information ===
 DATE=$(date "+%r  %A %d/%m/%Y")
-HOSTNAME=$(uci get system.@system[0].hostname 2>/dev/null || echo "OpenWRT Router")
+HOSTNAMER=$(uci get system.@system[0].hostname 2>/dev/null || echo "OpenWRT Router")
 UPTIME=$(uptime | awk -F'( |,|:)+' '{print $6" hours, "$7" minutes"}')
 LOAD_AVG=$(awk '{print "1min: "$1", 5min: "$2", 15min: "$3}' /proc/loadavg)
 CPU_TEMP=$(awk '{sum+=$1} END {if(NR>0) printf "%.1f°C\n", sum/NR/1000; else print "N/A"}' /sys/class/thermal/thermal_zone*/temp 2>/dev/null)
@@ -62,7 +62,7 @@ WIFI_DEVICES=$(iwinfo | awk -F': ' '
 
 # === Build the Message ===
 cat <<EOF | msmtp -a default ratulopenwrt@gmail.com
-Subject: 📊 $HOSTNAME Status Report — $DATE
+Subject: 📊 $HOSTNAMER Status Report — $DATE
 
 Hello,
 
@@ -73,7 +73,7 @@ Here’s your latest **router health report** from $HOSTNAME.
 ────────────────────────────
 
 🖥 **System Info**
-Hostname: $HOSTNAME
+Hostname: $HOSTNAMER
 Uptime: $UPTIME
 CPU Load: $LOAD_AVG
 CPU Temp: $CPU_TEMP
