@@ -20,11 +20,18 @@ MEM_USED=$(awk -v t=$(awk '/MemTotal/ {print $2}' /proc/meminfo) -v f=$(awk '/Me
 # === Storage Info ===
 STORAGE=$(df -h | awk 'NR==1 || /overlay/')
 
-# === Connected Devices (LAN + ARP Table) ===
-LAN_DEVICES=$(ip neigh show | awk '{print $1 " -> " $5}' | sort)
+# === Connected Devices (LAN) with hostnames if possible ===
+LAN_DEVICES=$(ip neigh show | awk '{print $1 " -> " $5}' | while read ip mac; do
+    HOST=$(grep -i "$mac" /tmp/dhcp.leases 2>/dev/null | awk '{print $4}')
+    [ -z "$HOST" ] && HOST=$(grep -i "$mac" /etc/ethers 2>/dev/null | awk '{print $2}')
+    [ -z "$HOST" ] && HOST="unknown"
+    echo "$ip -> $mac ($HOST)"
+done)
 
 # === Connected Wi-Fi Clients ===
-WIFI_DEVICES=$(iwinfo | grep -E 'ESSID|Associated MAC' | awk '/ESSID/{ssid=$2} /Associated MAC/{print $3 " (" ssid ")"}')
+WIFI_DEVICES=$(iwinfo | awk '
+/ESSID/ {ssid=$2}
+/Associated MAC/ {print $3 " (" ssid ")"}')
 
 # === Build the Message ===
 cat <<EOF | msmtp -a default ratulopenwrt@gmail.com
