@@ -1,0 +1,8 @@
+# Put your custom commands here that should be executed once
+# the system init finished. By default this file does nothing.
+
+ln -s /usr/bin/msmtp /usr/sbin/sendmail
+/root/ping_led.sh &
+/root/reboot_message.sh &
+
+exit 0
