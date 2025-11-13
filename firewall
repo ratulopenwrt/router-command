@@ -1,11 +1,12 @@
-
 config defaults
+	option syn_flood '1'
 	option input 'REJECT'
 	option output 'ACCEPT'
 	option forward 'REJECT'
-	option synflood_protect '1'
 	option flow_offloading '1'
 	option flow_offloading_hw '1'
+	option fullcone '1'
+	option fullcone6 '0'
 
 config zone
 	option name 'lan'
@@ -23,6 +24,7 @@ config zone
 	option mtu_fix '1'
 	list network 'wan'
 	list network 'wan6'
+	list network 'wanb'
 
 config rule
 	option name 'Allow-DHCP-Renew'
@@ -296,5 +298,6 @@ config rule
 
 config forwarding
  	option src 'lan'
-         option dest 'wan'
-     #    option dest 'unspecified'
+     #   option dest 'wan'
+        option dest 'unspecified'
+root@HX21:/etc/config#
