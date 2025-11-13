@@ -66,7 +66,7 @@ Subject: 📊 $HOSTNAMER Status Report — $DATE
 
 Hello,
 
-Here’s your latest **router health report** from $HOSTNAME.
+Here’s your latest **router health report** from $HOSTNAMER.
 
 ────────────────────────────
 📅 Time: $DATE
