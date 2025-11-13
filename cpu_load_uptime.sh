@@ -10,7 +10,7 @@ CPU_TEMP=$(awk '{sum+=$1} END {if(NR>0) printf "%.1f°C\n", sum/NR/1000; else pr
 # === Network Information ===
 IPV4_ADDR=$(ip addr show | awk '/inet / {print $2}' | cut -d/ -f1)
 WAN_IP=$(wget -qO- http://ifconfig.me/ip 2>/dev/null || echo "N/A")
-SSID=$(iwinfo 2>/dev/null | awk -F'"' '/ESSID/ {print $2; exit}')
+SSID=$(iwinfo | awk -F'"' '/ESSID/ {print $2; exit}')
 
 # === Memory Usage ===
 MEM_TOTAL=$(awk '/MemTotal/ {printf "%.1f MB", $2/1024}' /proc/meminfo)
@@ -20,18 +20,35 @@ MEM_USED=$(awk -v t=$(awk '/MemTotal/ {print $2}' /proc/meminfo) -v f=$(awk '/Me
 # === Storage Info ===
 STORAGE=$(df -h | awk 'NR==1 || /overlay/')
 
-# === Connected Devices (LAN) with hostnames if possible ===
-LAN_DEVICES=$(ip neigh show | awk '{print $1 " -> " $5}' | while read ip mac; do
-    HOST=$(grep -i "$mac" /tmp/dhcp.leases 2>/dev/null | awk '{print $4}')
-    [ -z "$HOST" ] && HOST=$(grep -i "$mac" /etc/ethers 2>/dev/null | awk '{print $2}')
+# === Connected LAN Devices with hostnames ===
+LAN_DEVICES=$(ip neigh show | awk '{print $1 " " $5}' | while read ip mac; do
+    mac_lower=$(echo "$mac" | tr 'A-F' 'a-f')
+    
+    # DHCP leases
+    HOST=$(awk -v m="$mac_lower" '{if(tolower($2)==m) print $4}' /tmp/dhcp.leases)
+    
+    # /etc/ethers fallback
+    [ -z "$HOST" ] && HOST=$(awk -v m="$mac_lower" '{if(tolower($1)==m) print $2}' /etc/ethers)
+    
     [ -z "$HOST" ] && HOST="unknown"
     echo "$ip -> $mac ($HOST)"
 done)
 
-# === Connected Wi-Fi Clients ===
-WIFI_DEVICES=$(iwinfo | awk '
+# === Connected Wi-Fi Clients with signal strength ===
+WIFI_DEVICES=$(iwinfo | awk -F': ' '
+/Interface/ {iface=$2}
 /ESSID/ {ssid=$2}
-/Associated MAC/ {print $3 " (" ssid ")"}')
+/Associated MAC/ {
+    mac=$2
+    getline
+    getline
+    sig=""
+    while($0 ~ /Signal/) {
+        sig=$2
+        getline
+    }
+    print mac " (" ssid ", signal: " sig ")"
+}')
 
 # === Build the Message ===
 cat <<EOF | msmtp -a default ratulopenwrt@gmail.com
