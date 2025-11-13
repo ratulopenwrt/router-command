@@ -20,7 +20,6 @@ MEM_USED=$(awk -v t=$(awk '/MemTotal/ {print $2}' /proc/meminfo) -v f=$(awk '/Me
 # === Storage Info ===
 STORAGE=$(df -h | awk 'NR==1 || /overlay/')
 
-# === Connected LAN Devices with hostnames ===
 # === Connected Devices (LAN) with hostnames ===
 LAN_DEVICES=""
 for line in $(ip neigh show | awk '{print $1" "$5}'); do
@@ -38,8 +37,11 @@ for line in $(ip neigh show | awk '{print $1" "$5}'); do
     # Default to unknown if still empty
     [ -z "$HOSTNAME" ] && HOSTNAME="unknown"
 
-    LAN_DEVICES="$LAN_DEVICES$IP -> $MAC ($HOSTNAME)\n"
+    # Append with a real newline
+    LAN_DEVICES="$LAN_DEVICES$IP -> $MAC ($HOSTNAME)
+"
 done
+
 
 
 # === Connected Wi-Fi Clients with signal strength ===
