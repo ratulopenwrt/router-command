@@ -19,9 +19,9 @@ sysupgrade.conf:/etc/sysupgrade.conf:::
 rc.local:/etc/rc.local:::
 
 backup.sh:/root/backup.sh:::
-cpu_load_uptime.sh:/root/cpu_load_uptime.sh:::./cpu_load_uptime.sh
+cpu_load_uptime.sh:/root/cpu_load_uptime.sh:::./cpu_load_uptime.sh:
 pay_bill_notice.sh:/root/pay_bill_notice.sh:::
-reboot_message.sh:/root/reboot_message.sh:::./reboot_message.sh
+reboot_message.sh:/root/reboot_message.sh:::./reboot_message.sh:
 upf.sh:/root/upf.sh:::
 upw.sh:/root/upw.sh:::
 upwc.sh:/root/upwc.sh:::
