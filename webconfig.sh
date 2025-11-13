@@ -10,13 +10,13 @@ NOW=$(date "+%Y-%m-%d %H:%M:%S")
 # Files to manage: src:dest:service:pre_script:post_script
 # Use empty string '' for fields that are empty
 FILES="
-ethers:/etc/ethers:'':'' 
-firewall:/etc/config/firewall:firewall:./upf.sh:'' 
-wireless:/etc/config/wireless:network:./upw.sh:'' 
-root:/etc/crontabs/root:cron:'' 
-sysupgrade.conf:/etc/sysupgrade.conf:'':'' 
-webcommand.sh:/root/webcommand.sh:'':'sh /root/webcommand.sh' 
-webconfig.sh:/root/webconfig.sh:'':'./upwc.sh':'' 
+ethers:/etc/ethers::: 
+firewall:/etc/config/firewall:firewall:./upf.sh: 
+wireless:/etc/config/wireless:network:./upw.sh: 
+root:/etc/crontabs/root:cron:: 
+sysupgrade.conf:/etc/sysupgrade.conf::: 
+webcommand.sh:/root/webcommand.sh::sh /root/webcommand.sh: 
+webconfig.sh:/root/webconfig.sh:::./upwc.sh
 "
 
 # Function to update file if changed
@@ -33,11 +33,11 @@ update_file() {
     fi
 
     if [ ! -f "$dest" ] || ! cmp -s "$src" "$dest"; then
-        [ "$pre" != "''" ] && [ -x "$pre" ] && "$pre" >> "$LOG_FILE" 2>&1
+        [ -n "$pre" ] && [ -x "$pre" ] && "$pre" >> "$LOG_FILE" 2>&1
         mv "$src" "$dest"
         echo "[$NOW] Updated $dest" >> "$LOG_FILE"
-        [ "$service" != "''" ] && service "$service" restart && echo "[$NOW] Restarted service $service" >> "$LOG_FILE"
-        [ "$post" != "''" ] && [ -x "$post" ] && "$post" & echo "[$NOW] Executed post script $post" >> "$LOG_FILE"
+        [ -n "$service" ] && service "$service" restart && echo "[$NOW] Restarted service $service" >> "$LOG_FILE"
+        [ -n "$post" ] && [ -x "$post" ] && "$post" & echo "[$NOW] Executed post script $post" >> "$LOG_FILE"
     else
         rm -f "$src"
     fi
@@ -53,8 +53,8 @@ for line in $FILES; do
     FILE_PRE="$4"
     FILE_POST="$5"
 
-    # Download
-    wget -q -N -P "$TMP_DIR" "$REMOTE_BASE/$FILE_SRC"
+    # Download (busybox wget compatible)
+    wget -q -O "$TMP_DIR/$FILE_SRC" "$REMOTE_BASE/$FILE_SRC"
 
     # Update if exists
     [ -f "$TMP_DIR/$FILE_SRC" ] && update_file "$TMP_DIR/$FILE_SRC" "$FILE_DEST" "$FILE_SERVICE" "$FILE_PRE" "$FILE_POST"
