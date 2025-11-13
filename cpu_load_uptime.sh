@@ -21,18 +21,26 @@ MEM_USED=$(awk -v t=$(awk '/MemTotal/ {print $2}' /proc/meminfo) -v f=$(awk '/Me
 STORAGE=$(df -h | awk 'NR==1 || /overlay/')
 
 # === Connected LAN Devices with hostnames ===
-LAN_DEVICES=$(ip neigh show | awk '{print $1 " " $5}' | while read ip mac; do
-    mac_lower=$(echo "$mac" | tr 'A-F' 'a-f')
+# === Connected Devices (LAN) with hostnames ===
+LAN_DEVICES=""
+for line in $(ip neigh show | awk '{print $1" "$5}'); do
+    IP=$(echo $line | cut -d' ' -f1)
+    MAC=$(echo $line | cut -d' ' -f2 | tr '[:upper:]' '[:lower:]')
+
+    # Try DHCP leases first
+    HOSTNAME=$(awk -v mac="$MAC" 'BEGIN{h="*"} $2==mac {if($4!="*") h=$4; print h; exit}' /tmp/dhcp.leases)
     
-    # DHCP leases
-    HOST=$(awk -v m="$mac_lower" '{if(tolower($2)==m) print $4}' /tmp/dhcp.leases)
-    
-    # /etc/ethers fallback
-    [ -z "$HOST" ] && HOST=$(awk -v m="$mac_lower" '{if(tolower($1)==m) print $2}' /etc/ethers)
-    
-    [ -z "$HOST" ] && HOST="unknown"
-    echo "$ip -> $mac ($HOST)"
-done)
+    # If DHCP lease has no hostname, fallback to /etc/ethers
+    if [ "$HOSTNAME" = "*" ]; then
+        HOSTNAME=$(awk -v mac="$MAC" 'tolower($1)==mac {print $2; exit}' /etc/ethers)
+    fi
+
+    # Default to unknown if still empty
+    [ -z "$HOSTNAME" ] && HOSTNAME="unknown"
+
+    LAN_DEVICES="$LAN_DEVICES$IP -> $MAC ($HOSTNAME)\n"
+done
+
 
 # === Connected Wi-Fi Clients with signal strength ===
 WIFI_DEVICES=$(iwinfo | awk -F': ' '
