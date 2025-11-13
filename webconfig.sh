@@ -3,22 +3,14 @@
 # === Configuration ===
 TMP_DIR="/tmp"
 REMOTE_BASE="https://raw.githubusercontent.com/ratulopenwrt/router-command/main"
-LOCK_FILE="/tmp/update_router.lock"
 LOG_FILE="/tmp/update_router.log"
 
 NOW=$(date "+%Y-%m-%d %H:%M:%S")
 
-# Exit if another instance is running
-if [ -f "$LOCK_FILE" ]; then
-    echo "[$NOW] Another instance is running. Exiting." >> "$LOG_FILE"
-    exit 0
-fi
-touch "$LOCK_FILE"
-
 # Files to manage: src:dest:service:pre_script:post_script
 # Use empty string '' for fields that are empty
 FILES="
-ethers:/etc/ethers:''':'' 
+ethers:/etc/ethers:'':'' 
 firewall:/etc/config/firewall:firewall:./upf.sh:'' 
 wireless:/etc/config/wireless:network:./upw.sh:'' 
 root:/etc/crontabs/root:cron:'' 
@@ -68,8 +60,6 @@ for line in $FILES; do
     [ -f "$TMP_DIR/$FILE_SRC" ] && update_file "$TMP_DIR/$FILE_SRC" "$FILE_DEST" "$FILE_SERVICE" "$FILE_PRE" "$FILE_POST"
 done
 
-# Cleanup
-rm -f "$LOCK_FILE"
 echo "[$NOW] Update run completed." >> "$LOG_FILE"
 
 exit 0
