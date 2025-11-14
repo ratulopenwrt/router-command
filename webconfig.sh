@@ -17,7 +17,7 @@ log() {
 FILES="
 aliases:/etc/aliases:::
 ethers:/etc/ethers:::
-firewall:/etc/config/firewall:firewall:::./upf.sh
+firewall:/etc/config/firewall::::./upf.sh
 root:/etc/crontabs/root:cron::
 sysupgrade.conf:/etc/sysupgrade.conf:::
 rc.local:/etc/rc.local:::
