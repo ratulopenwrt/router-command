@@ -4,12 +4,28 @@ config globals 'globals'
 
 ######## RULES ########
 
+# All UDP = latency-sensitive → WAN → WANB → WANC
+config rule 'realtime_udp'
+	option proto 'udp'
+	option family 'ipv4'
+	option sticky '0'
+	option use_policy 'latency_priority'
+
+# Latency-sensitive TCP (no ports) → WAN → WANB → WANC
+config rule 'realtime_tcp'
+	option proto 'tcp'
+	option family 'ipv4'
+	option sticky '1'
+	option use_policy 'latency_priority'
+
+# HTTPS follows balanced distribution
 config rule 'https'
 	option sticky '1'
 	option dest_port '443'
 	option proto 'tcp'
 	option use_policy 'balanced'
 
+# Default traffic (bulk) uses balanced
 config rule 'default_rule_v4'
 	option dest_ip '0.0.0.0/0'
 	option use_policy 'balanced'
@@ -162,8 +178,9 @@ config member 'wanc6_m1_w5'
 	option metric '1'
 	option weight '5'
 
-######## POLICY ########
+######## POLICIES ########
 
+# Balanced (75/20/5)
 config policy 'balanced'
 	list use_member 'wan_m1_w75'
 	list use_member 'wan6_m1_w75'
@@ -173,3 +190,27 @@ config policy 'balanced'
 	list use_member 'wanc6_m1_w5'
 	option last_resort 'default'
 
+# Latency-sensitive → WAN → WANB → WANC
+config policy 'latency_priority'
+	list use_member 'wan_m1_w75'
+	list use_member 'wanb_m1_w20'
+	list use_member 'wanc_m1_w5'
+	option last_resort 'default'
+
+# WAN only
+config policy 'wan_only'
+	list use_member 'wan_m1_w75'
+	list use_member 'wan6_m1_w75'
+	option last_resort 'unreachable'
+
+# WANB only
+config policy 'wanb_only'
+	list use_member 'wanb_m1_w20'
+	list use_member 'wanb6_m1_w20'
+	option last_resort 'unreachable'
+
+# WANC only
+config policy 'wanc_only'
+	list use_member 'wanc_m1_w5'
+	list use_member 'wanc6_m1_w5'
+	option last_resort 'unreachable'
