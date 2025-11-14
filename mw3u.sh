@@ -16,6 +16,7 @@ Regards,
 OpenWRT System Reporter
 EOF
 
+/etc/init.d/mwan3 restart
 ./cpu_load_uptime.sh
 
 exit 0
