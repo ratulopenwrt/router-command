@@ -251,5 +251,5 @@ config rule
 
 config forwarding
 	option src 'lan'
-	option dest 'unspecified'
+#	option dest 'unspecified'
 
