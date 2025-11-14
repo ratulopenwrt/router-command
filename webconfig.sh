@@ -22,7 +22,6 @@ root:/etc/crontabs/root:cron::
 sysupgrade.conf:/etc/sysupgrade.conf:::
 rc.local:/etc/rc.local:::
 
-# === Scripts in /root ===
 backup.sh:/root/backup.sh:::
 cpu_load_uptime.sh:/root/cpu_load_uptime.sh::::./cpu_load_uptime.sh
 pay_bill_notice.sh:/root/pay_bill_notice.sh:::
@@ -33,12 +32,28 @@ upwc.sh:/root/upwc.sh:::
 mw3u.sh:/root/mw3u.sh:::
 webcommand.sh:/root/webcommand.sh::::./webcommand.sh
 webconfig.sh:/root/webconfig.sh::::./upwc.sh
-
-# === NEW: mwan3 configuration ===
 mwan3:/etc/config/mwan3:mwan3::::./mw3u.sh
 "
 
-# Function to update file if changed
+# Ensure all /root scripts are executable before running
+chmod +x /root/*.sh 2>/dev/null || true
+
+# Helper to run post-scripts reliably
+run_post() {
+    post="$1"
+    [ -z "$post" ] && return
+    for p in "$post" "/root/$post" "/root/$(basename "$post")"; do
+        if [ -x "$p" ]; then
+            log "Running post-script $p"
+            "$p" >> "$LOG_FILE" 2>&1 &
+            log "Launched $p (background)"
+            return
+        fi
+    done
+    log "Post-script $post not found or not executable"
+}
+
+# Function to update a single file
 update_file() {
     src="$1"
     dest="$2"
@@ -46,23 +61,17 @@ update_file() {
     pre="$4"
     post="$5"
 
-    # sanity checks
     [ -z "$src" ] && log "Empty source; skipping." && return
     [ -z "$dest" ] && log "Empty destination for $src; skipping." && rm -f "$TMP_DIR/$src" 2>/dev/null && return
 
-    # run pre (if executable)
-    if [ -n "$pre" ] && [ -x "$pre" ]; then
-        log "Running pre-script $pre for $dest"
-        "$pre" >> "$LOG_FILE" 2>&1
-    fi
+    # Run pre-script if executable
+    [ -n "$pre" ] && [ -x "$pre" ] && log "Running pre-script $pre for $dest" && "$pre" >> "$LOG_FILE" 2>&1
 
-    # ensure dest dir exists
+    # Ensure destination directory exists
     destdir=$(dirname "$dest")
-    if [ -n "$destdir" ]; then
-        mkdir -p "$destdir" 2>/dev/null || true
-    fi
+    [ -n "$destdir" ] && mkdir -p "$destdir" 2>/dev/null || true
 
-    # move downloaded file into place
+    # Move downloaded file into place
     if mv "$TMP_DIR/$src" "$dest" 2>/dev/null; then
         log "Updated $dest"
     else
@@ -71,50 +80,21 @@ update_file() {
         return
     fi
 
-    # restart service if provided
-    if [ -n "$service" ]; then
-        if service "$service" restart >> "$LOG_FILE" 2>&1; then
-            log "Restarted service $service"
-        else
-            log "Failed to restart service $service"
-        fi
-    fi
+    # Restart service if specified
+    [ -n "$service" ] && service "$service" restart >> "$LOG_FILE" 2>&1 && log "Restarted service $service"
 
-    # run post (if executable). try from /root too for ./script cases
-    if [ -n "$post" ]; then
-        # if post is executable as given, run it
-        if [ -x "$post" ]; then
-            log "Executing post-script $post"
-            (cd /root 2>/dev/null; "$post") >> "$LOG_FILE" 2>&1 &
-            log "Launched post-script $post (background)"
-        elif [ -x "/root/$post" ]; then
-            log "Executing post-script /root/$post"
-            (cd /root 2>/dev/null; "/root/$post") >> "$LOG_FILE" 2>&1 &
-            log "Launched /root/$post (background)"
-        else
-            # try to execute by basename in /root (covers ./upwc.sh and bare names)
-            bn=$(basename "$post")
-            if [ -x "/root/$bn" ]; then
-                log "Executing post-script /root/$bn"
-                (cd /root 2>/dev/null; "/root/$bn") >> "$LOG_FILE" 2>&1 &
-                log "Launched /root/$bn (background)"
-            else
-                log "Post-script $post not executable or not found; skipping"
-            fi
-        fi
-    fi
+    # Run post-script
+    run_post "$post"
 }
 
 # === Download and process files ===
-# Use a safe line-by-line reader so blank lines and comments are ignored.
-printf '%s\n' "$FILES" | while IFS= read -r line; do
-    # trim leading/trailing whitespace (simple)
-    # (busybox ash doesn't have fancy parameter expansions portably; assume no weird whitespace)
+while IFS= read -r line; do
+    # Skip empty lines and comments
     case "$line" in
-        ''|\#*) continue ;;   # skip empty lines and comments
+        ''|\#*) continue ;;
     esac
 
-    # parse the 5 colon-separated fields
+    # Parse colon-separated fields
     OLDIFS=$IFS
     IFS=':'
     set -- $line
@@ -126,10 +106,9 @@ printf '%s\n' "$FILES" | while IFS= read -r line; do
     FILE_PRE=${4:-}
     FILE_POST=${5:-}
 
-    # skip if no source
     [ -z "$FILE_SRC" ] && continue
 
-    # download to tmp
+    # Download to tmp
     wget -q -O "$TMP_DIR/$FILE_SRC" "$REMOTE_BASE/$FILE_SRC"
     if [ ! -s "$TMP_DIR/$FILE_SRC" ]; then
         log "Download failed or empty for $FILE_SRC"
@@ -137,20 +116,15 @@ printf '%s\n' "$FILES" | while IFS= read -r line; do
         continue
     fi
 
-    # if dest exists and identical, remove tmp and skip
+    # Skip if destination exists and is identical
     if [ -n "$FILE_DEST" ] && [ -f "$FILE_DEST" ]; then
-        if cmp -s "$TMP_DIR/$FILE_SRC" "$FILE_DEST"; then
-            log "No change for $FILE_DEST; skipping"
-            rm -f "$TMP_DIR/$FILE_SRC" 2>/dev/null
-            continue
-        fi
+        cmp -s "$TMP_DIR/$FILE_SRC" "$FILE_DEST" && log "No change for $FILE_DEST; skipping" && rm -f "$TMP_DIR/$FILE_SRC" 2>/dev/null && continue
     fi
 
     update_file "$FILE_SRC" "$FILE_DEST" "$FILE_SERVICE" "$FILE_PRE" "$FILE_POST"
-done
-
-# Make all /root scripts executable
-chmod +x /root/*.sh 2>/dev/null || true
+done <<EOF
+$FILES
+EOF
 
 log "Update run completed."
 exit 0
