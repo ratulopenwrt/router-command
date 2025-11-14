@@ -162,7 +162,7 @@ config rule
 	list src_mac 'F8:2D:7C:76:8F:6B'
 
 config rule
-	option name 'Relatives'
+	option name 'Tuni'
 	option src 'lan'
 	option dest 'wan'
 	option target 'ACCEPT'
