@@ -27,7 +27,7 @@ This is an automatic notification to inform you that **$HOSTNAME** has successfu
 If this reboot was **unexpected**, please review your system logs or uptime policy.
 
 Best regards,  
-**OpenWRT System Reporter**
+**OpenWRT**
 EOF
 
 exit 0
