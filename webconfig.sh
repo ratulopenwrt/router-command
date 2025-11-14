@@ -11,25 +11,25 @@ NOW=$(date "+%Y-%m-%d %H:%M:%S")
 FILES="
 aliases:/etc/aliases:::
 ethers:/etc/ethers:::
-firewall:/etc/config/firewall:firewall::./upf.sh
+firewall:/etc/config/firewall:firewall:::./upf.sh
 root:/etc/crontabs/root:cron::
 sysupgrade.conf:/etc/sysupgrade.conf:::
 rc.local:/etc/rc.local:::
 
 # === Scripts in /root ===
 backup.sh:/root/backup.sh:::
-cpu_load_uptime.sh:/root/cpu_load_uptime.sh:::./cpu_load_uptime.sh
+cpu_load_uptime.sh:/root/cpu_load_uptime.sh::::./cpu_load_uptime.sh
 pay_bill_notice.sh:/root/pay_bill_notice.sh:::
-reboot_message.sh:/root/reboot_message.sh:::./reboot_message.sh
+reboot_message.sh:/root/reboot_message.sh::::./reboot_message.sh
 upf.sh:/root/upf.sh:::
 upw.sh:/root/upw.sh:::
 upwc.sh:/root/upwc.sh:::
 mw3u.sh:/root/mw3u.sh:::
-webcommand.sh:/root/webcommand.sh:::./webcommand.sh
-webconfig.sh:/root/webconfig.sh:::./upwc.sh
+webcommand.sh:/root/webcommand.sh::::./webcommand.sh
+webconfig.sh:/root/webconfig.sh::::./upwc.sh
 
 # === NEW: mwan3 configuration ===
-mwan3:/etc/config/mwan3:::./mw3u.sh
+mwan3:/etc/config/mwan3:mwan3::./mw3u.sh
 "
 
 # Function to update file if changed
