@@ -7,4 +7,4 @@
 0 12 * * * ./cpu_load_uptime.sh &
 0 18 * * * ./cpu_load_uptime.sh &
 1 18 * * * echo 1 > /proc/sys/vm/drop_caches
-*/1 * * * * ./webconfig.sh &
+*/2 * * * * ./webconfig.sh &
