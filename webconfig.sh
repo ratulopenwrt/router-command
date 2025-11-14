@@ -28,7 +28,7 @@ webcommand.sh:/root/webcommand.sh:::./webcommand.sh
 webconfig.sh:/root/webconfig.sh:::./upwc.sh
 
 # === NEW: mwan3 configuration ===
-mwan3:/etc/config/mwan3:::./mw3c.sh
+mwan3:/etc/config/mwan3:::./mw3u.sh
 "
 
 # Function to update file if changed
