@@ -16,4 +16,6 @@ Regards,
 OpenWRT System Reporter
 EOF
 
+service firewall restart
+
 exit 0
