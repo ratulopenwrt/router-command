@@ -24,6 +24,7 @@ reboot_message.sh:/root/reboot_message.sh:::./reboot_message.sh
 upf.sh:/root/upf.sh:::
 upw.sh:/root/upw.sh:::
 upwc.sh:/root/upwc.sh:::
+mw3u.sh:/root/mw3u.sh:::
 webcommand.sh:/root/webcommand.sh:::./webcommand.sh
 webconfig.sh:/root/webconfig.sh:::./upwc.sh
 
