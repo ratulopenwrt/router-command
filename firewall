@@ -201,6 +201,7 @@ config rule
 	list src_mac '1C:9F:4e:BF:CA:8D'
 	list src_mac '6C:D1:99:22:5D:67'
 	list src_mac '94:54:CE:52:24:F1'
+	list src_mac 'EA:AC:07:C3:98:A4'
 	list proto 'all'
 
 config rule
